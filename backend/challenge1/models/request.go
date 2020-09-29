@@ -1,6 +1,6 @@
 package models
 
-type RequestStruct struct {
+type SearchRequest struct {
 	CompanyName string `json:"companyName,omitempty"`
 	Owner       string `json:"owner,omitempty"`
 	Country     string `json:"country,omitempty"`
