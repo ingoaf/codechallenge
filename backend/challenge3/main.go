@@ -1,15 +1,29 @@
 package main
 
 import (
-	"github.com/Clarilab/codechallenge/backend/challenge2/database"
+	"fmt"
+
+	"github.com/Clarilab/gocloaksession"
+	"github.com/go-resty/resty/v2"
 	"github.com/savsgio/atreugo/v11"
 )
 
+const clientID = ""
+const clientSecret = ""
+const keycloakRealm = ""
+const keycloakURL = ""
+
 func main() {
-	repo := database.NewRepository()
-	api := &API{
-		repo: repo,
+	gocloakSession, err := gocloaksession.NewSession(clientID, clientSecret, keycloakRealm, keycloakURL)
+	if err != nil {
+		fmt.Println("could not initialize gocloaksession")
+		return
 	}
+
+	restyClient := resty.New()
+	restyClient.OnBeforeRequest(gocloakSession.AddAuthTokenToRequest)
+
+	api := &API{}
 
 	config := atreugo.Config{
 		Addr: "0.0.0.0:8000",
@@ -28,7 +42,6 @@ func main() {
 
 // API implements the rest api handlers
 type API struct {
-	repo database.Repository
 }
 
 func (api *API) SearchForName(ctx *atreugo.RequestCtx) error {
