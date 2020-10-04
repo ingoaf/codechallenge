@@ -21,7 +21,7 @@ func main() {
 	}
 
 	restyClient := resty.New()
-	restyClient.OnBeforeRequest(gocloakSession.AddAuthTokenToRequest)
+	restyClient.OnBeforeRequest(gocloakSession.AddAuthTokenToRequest) // Always have an active token, before sending any request
 
 	api := &API{}
 
