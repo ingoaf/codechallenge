@@ -27,7 +27,7 @@ func Test_FizzBuzz_Buzz(t *testing.T) {
 	fizzBuzzer := challenge1.NewFizzBuzzer()
 
 	// Act
-	result, err := fizzBuzzer.FizzBuzz(3)
+	result, err := fizzBuzzer.FizzBuzz(5)
 	if err != nil {
 		t.Error(err)
 	}
@@ -59,7 +59,7 @@ func Test_FizzBuzz_EmptyString(t *testing.T) {
 	fizzBuzzer := challenge1.NewFizzBuzzer()
 
 	// Act
-	result, err := fizzBuzzer.FizzBuzz(42)
+	result, err := fizzBuzzer.FizzBuzz(43)
 	if err != nil {
 		t.Error(err)
 	}
