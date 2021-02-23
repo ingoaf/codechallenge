@@ -6,7 +6,6 @@ Contains Code Challenge Tasks
 
 1. Fork the repository
 2. Solve challenges inside your fork
-3. Open a Pullrequest
 
 ## FAQ
 

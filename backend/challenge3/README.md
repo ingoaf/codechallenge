@@ -11,7 +11,7 @@ The first should execute the simple search, using the name from the path as quer
 The second should execute the extended search. The query comes from the body of the POST request.
 
 1. Get familiar with atreugo. You can find the documentation [here](https://pkg.go.dev/github.com/savsgio/atreugo/v11)
-1. gocloaksession can be used as a middleware for atreugo. Get familiar with it [here]{https://github.com/Clarilab/gocloaksession}
+1. gocloaksession can be used as a middleware for atreugo. Get familiar with it [here](https://github.com/Clarilab/gocloaksession)
 1. The functions, that are called by atreugo should include these steps:
     1. Read the parameter or body from the request.
     1. Use resty to call the search-API. The documentation is [here](https://godoc.org/github.com/go-resty/resty)
