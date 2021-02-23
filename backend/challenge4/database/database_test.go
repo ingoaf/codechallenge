@@ -8,20 +8,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_Repository_GetByName(t *testing.T) {
-	repo := database.NewRepository()
-
-	result := repo.GetByName("finux")
-
-	if result == nil {
-		t.Error("Expected to find any result")
-	}
-
-	if len(result) != 2 {
-		t.Errorf("Expected to find two results, found %d", len(result))
-	}
-}
-
 func Test_Repository_Get(t *testing.T) {
 	repo := database.NewRepository()
 	generalMsg := "wrong search result"

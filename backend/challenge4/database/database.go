@@ -3,13 +3,12 @@ package database
 import (
 	"strings"
 
-	"github.com/Clarilab/codechallenge/backend/challenge2/models"
+	"github.com/Clarilab/codechallenge/backend/challenge4/models"
 )
 
 // Repository loads data from the database
 type Repository interface {
-	GetByName(name string) []*models.Company
-	Get(request models.SearchRequest) []*models.Company
+	Get(request *models.SearchRequest) ([]models.Company, error)
 }
 
 type repository struct {
@@ -21,31 +20,16 @@ func NewRepository() Repository {
 	return &repository{Companies: getAll()}
 }
 
-// GetByName returns all companys from a database which match the given name
-func (repo *repository) GetByName(name string) []*models.Company {
-	companies := repo.Companies
-	companiesWithGivenName := []*models.Company{}
-	name = strings.ToLower(name)
-	for i := range companies {
-		companyName := strings.ToLower(companies[i].Name)
-		if strings.Contains(companyName, name) {
-			companiesWithGivenName = append(companiesWithGivenName, &companies[i])
-		}
-	}
-	return companiesWithGivenName
-}
-
 // Get returns all companies which match criteria from the search request
-func (repo *repository) Get(request models.SearchRequest) []*models.Company {
+func (repo *repository) Get(request *models.SearchRequest) ([]models.Company, error) {
 	companies := repo.Companies
-	companiesMatchingSearch := []*models.Company{}
-	for i := range companies {
-		com := &companies[i]
-		if companyMatchesSearch(com, request) {
+	companiesMatchingSearch := []models.Company{}
+	for _, com := range companies {
+		if companyMatchesSearch(&com, *request) {
 			companiesMatchingSearch = append(companiesMatchingSearch, com)
 		}
 	}
-	return companiesMatchingSearch
+	return companiesMatchingSearch, nil
 }
 
 func companyMatchesSearch(company *models.Company, request models.SearchRequest) bool {
